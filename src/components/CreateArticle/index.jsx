@@ -1,18 +1,15 @@
 import React from 'react';
 
+import Banner from './../Banner';
+
 const CreateArticle = () => {
   return (
     <div>
       {/* Header */}
-      <header className="header header-inverse bg-fixed" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/assets/img/bg-laptop.jpg)` }} data-overlay={8}>
-        <div className="container text-center">
-          <div className="row">
-            <div className="col-12 col-lg-8 offset-lg-2">
-              <h1>Write an article</h1>
-            </div>
-          </div>
-        </div>
-      </header>
+      <Banner 
+        backgroundImage={`url(${process.env.PUBLIC_URL}/assets/img/bg-laptop.jpg)`}
+        title="Write an article"
+      />
       {/* END Header */}
       {/* Main container */}
       <main className="main-content">
