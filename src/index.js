@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import Welcome from './components/Welcome';
 
 import registerServiceWorker from './registerServiceWorker';
@@ -22,6 +23,7 @@ ReactDOM.render(
       <Route exact path="/" component={Welcome} />
       <Route path="/about" component={About} />
       <Route path="/home" component={Home} />
+      <Footer />
     </div>
   </BrowserRouter>
   , document.getElementById('root'));
