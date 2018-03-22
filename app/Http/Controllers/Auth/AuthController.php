@@ -45,7 +45,7 @@ class AuthController extends Controller
         }
 
         // All good so return the token
-        return $this->onAuthorized($token);
+        return $this->onAuthorized($token, User::where('email', $request->email)->first());
     }
 
     /**
@@ -77,12 +77,13 @@ class AuthController extends Controller
      *
      * @return JsonResponse
      */
-    protected function onAuthorized($token)
+    protected function onAuthorized($token, $user)
     {
         return new JsonResponse([
             'message' => 'token_generated',
             'data' => [
                 'token' => $token,
+                'user' => $user
             ]
         ]);
     }
@@ -167,6 +168,6 @@ class AuthController extends Controller
 
         $token = JWTAuth::fromUser($user);
 
-        return $this->onAuthorized($token);
+        return $this->onAuthorized($token, $user);
     }
 }

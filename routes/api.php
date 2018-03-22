@@ -15,7 +15,7 @@ $api = $app->make(Dingo\Api\Routing\Router::class);
 
 $api->version('v1', function ($api) {
     $api->post('/auth/login', [
-        'as' => 'api.auth.login',
+        'as' => 'api.auth.logisn',
         'uses' => 'App\Http\Controllers\Auth\AuthController@postLogin',
     ]);
 
@@ -27,7 +27,7 @@ $api->version('v1', function ($api) {
     $api->get('/articles', [
         'uses' => 'App\Http\Controllers\ArticlesController@index',
         'as' => 'api.articles.index'
-    ]);
+    ]); 
 
     $api->get('/articles/category/{id}', [
         'uses' => 'App\Http\Controllers\CategoriesController@show',
