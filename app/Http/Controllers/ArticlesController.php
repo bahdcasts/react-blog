@@ -15,7 +15,7 @@ class ArticlesController extends Controller
      */
     public function index()
     {
-        $articles = Article::paginate(5);
+        $articles = Article::orderBy('created_at', 'desc')->paginate(5);
 
         return $this->sendResponse('success', $articles, 'Articles fetched successfully.');
     }
@@ -23,7 +23,8 @@ class ArticlesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -33,7 +34,7 @@ class ArticlesController extends Controller
                 'title' => 'required|max:255',
                 'content' => 'required',
                 'imageUrl' => 'required|url',
-                'category_id' => 'required'
+                'category_id' => 'required',
             ]);
         } catch (ValidationException $e) {
             return $e->getResponse();
@@ -44,8 +45,8 @@ class ArticlesController extends Controller
             'content' => $request->content,
             'imageUrl' => $request->imageUrl,
             'category_id' => $request->category_id,
-            'slug' => str_slug($request->title) . '-' . time(),
-            'user_id' => $request->user()->id
+            'slug' => str_slug($request->title).'-'.time(),
+            'user_id' => $request->user()->id,
         ]);
 
         return $this->sendResponse('success', $article->fresh(), 'Article created successfully.');
@@ -54,7 +55,8 @@ class ArticlesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -68,17 +70,18 @@ class ArticlesController extends Controller
                 return $this->sendResponse('fail', [], 'Article not found.', 404);
             }
 
-            return $this->sendResponse('success', $articleBySlug->fresh(), 'Article found successfully.', 200);            
+            return $this->sendResponse('success', $articleBySlug->fresh(), 'Article found successfully.', 200);
         }
 
-        return $this->sendResponse('success', $article->fresh(), 'Article found successfully.', 200);   
+        return $this->sendResponse('success', $article->fresh(), 'Article found successfully.', 200);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -99,18 +102,19 @@ class ArticlesController extends Controller
         $article->imageUrl = $request->imageUrl ?: $article->imageUrl;
         $article->category_id = $request->category_id ?: $article->category_id;
         if ($request->title) {
-            $article->slug = str_slug($request->title) . '-' . time();
+            $article->slug = str_slug($request->title).'-'.time();
         }
 
         $article->save();
-        
-        return $this->sendResponse('success', $article->fresh(), 'Article updated successfully.');        
+
+        return $this->sendResponse('success', $article->fresh(), 'Article updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request, $id)
@@ -127,6 +131,6 @@ class ArticlesController extends Controller
 
         $article->delete();
 
-        return $this->sendResponse('success', [], 'Article deleted successfully.', 200);        
+        return $this->sendResponse('success', [], 'Article deleted successfully.', 200);
     }
 }
