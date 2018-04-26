@@ -44,7 +44,7 @@ $api->version('v1', function ($api) {
         'as' => 'api.categories.show',
     ]);
 
-    $api->get('/articles/{id}', [
+    $api->get('/article/{id}', [
         'uses' => 'App\Http\Controllers\ArticlesController@show',
         'as' => 'api.articles.show',
     ]);
