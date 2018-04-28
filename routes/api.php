@@ -57,6 +57,11 @@ $api->version('v1', function ($api) {
             'as' => 'api.articles.store',
         ]);
 
+        $api->get('/user/articles', [
+            'uses' => 'App\Http\Controllers\ArticlesController@getAuthUserArticles',
+            'as' => 'api.articles.getAuthUserArticles',
+        ]);
+
         $api->patch('/articles/{id}', [
             'uses' => 'App\Http\Controllers\ArticlesController@update',
             'as' => 'api.articles.update',

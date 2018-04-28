@@ -110,6 +110,11 @@ class ArticlesController extends Controller
         return $this->sendResponse('success', $article->fresh(), 'Article updated successfully.');
     }
 
+    public function getAuthUserArticles(Request $request)
+    {
+        return $this->sendResponse('success', $request->user()->articles, 'Article updated successfully.');
+    }
+
     /**
      * Remove the specified resource from storage.
      *
