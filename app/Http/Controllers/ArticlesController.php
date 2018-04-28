@@ -112,7 +112,7 @@ class ArticlesController extends Controller
 
     public function getAuthUserArticles(Request $request)
     {
-        return $this->sendResponse('success', $request->user()->articles, 'Article updated successfully.');
+        return $this->sendResponse('success', $request->user()->articles, 'User articles fetched successfully.');
     }
 
     /**
