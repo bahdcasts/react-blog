@@ -2,13 +2,13 @@
 
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class BlogSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run()
     {
-        $this->call('BlogSeeder');
+        factory(\App\Article::class, 50)->create();
     }
 }

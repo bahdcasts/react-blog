@@ -74,7 +74,8 @@ class AuthController extends Controller
 
     /**
      * What response should be returned on authorized.
-     *
+     * Return token and user 
+     * 
      * @return JsonResponse
      */
     protected function onAuthorized($token, $user)
